@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name:  web-dprc
+  namespace: dev-xibar
+spec:
+  selector:
+    app: web-dprc
+  ports:
+  - protocol: TCP
+    port: 37080
+    targetPort: 37080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-dprc
+  namespace: dev-xibar
+  labels:
+    app: web-dprc
+spec:
+  strategy:
+      type: Recreate
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web-dprc
+  template:
+    metadata:
+      labels:
+        app: web-dprc
+    spec:
+      imagePullSecrets:
+      - name: regkano
+      containers:
+      - name: web-dprc
+        image: registry.kanosolution.net/sebar/apps/xi-web-user/web-dprc:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 37080

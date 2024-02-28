@@ -1,0 +1,10 @@
+stages:
+- build
+- deploy
+
+variables:
+  V_ADHOC: 2
+  
+include: 
+  - '/ci/build.yml'
+  - '/ci/deploy.yml'
