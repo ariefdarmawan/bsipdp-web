@@ -12,7 +12,7 @@
         <div>
             <s-button class="btn_primary" icon="refresh" label="Refresh" @click="refreshList" />
         </div>
-        <div class="flex flex-col gap-2" v-if="data.records.length > 0 && !data.loading">
+        <div class="flex flex-col gap-2 scroll-auto max-h-[600px] overflow-scroll" v-if="data.records.length > 0 && !data.loading">
             <div v-for="record in data.records" 
                 class="flex flex-col cursor:pointer even:bg-slate-100 p-1 hover:bg-slate-300"
                 @dblclick="dblClick(record.cif, data.display)"
